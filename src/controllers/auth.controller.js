@@ -42,6 +42,14 @@ const registerUser = async (req, res) => {
         user: user
     })
 
+
+
+const logoutUser = async (req, res) => {
+    res.clearCookie("token")
+
+    res.status(200).json({
+        message: "User logged out successfully"
+    })
 }
 
 const getData = async (req, res) => {
@@ -54,4 +62,4 @@ const getData = async (req, res) => {
     })
 }
 
-module.exports = { registerUser, getData }
+module.exports = { registerUser, logoutUser, getData }
