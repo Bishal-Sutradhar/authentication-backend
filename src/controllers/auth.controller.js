@@ -1,5 +1,6 @@
 const userModel = require('../models/user.model')
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
 
 
 const registerUser = async (req, res) => {
@@ -19,10 +20,11 @@ const registerUser = async (req, res) => {
         })
     }
 
+    const hashedPassword = bcrypt.hash(password)
     const user = await userModel.create({
         username,
         email,
-        password
+        password = hashedPassword
     })
 
     const token = jwt.sign(
